@@ -1,7 +1,7 @@
 const {QueryTypes} = require('sequelize');
- const db = require('../models/index');
- const User = db.user;
-
+const db = require('../models/index');
+const User = db.user;
+const Contact = db.contact;
 
 const postUsers = async(req,res)=>{
     
@@ -73,6 +73,21 @@ const usersRawQuery = async(req,res)=>{
 
 }
 
+const oneToOneUser = async(req,res)=>{
+
+//   const data = await User.create({firstName:"Mohit",lastName:"Sharma"})
+//     if(data && data.id){
+//      await Contact.create({permanent_address:"Up",current_address:"Bhopal",
+//          UserId:data.id })
+//      }
+ 
+    const data = await User.findAll({
+                include:Contact
+    });
+ 
+    res.status(200).json({data})
+}
+
 
 module.exports = {
     postUsers,
@@ -81,5 +96,6 @@ module.exports = {
     deleteAllUser,
     deleteUser,
     updateUser,
-    usersRawQuery
+    usersRawQuery,
+    oneToOneUser
 }

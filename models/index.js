@@ -18,8 +18,12 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.contact = require('./contact')(sequelize,DataTypes)
 db.user = require('./user')(sequelize,DataTypes,Model)
+db.contact = require('./contact')(sequelize,DataTypes)
+
+db.user.hasOne(db.contact)
+db.contact.belongsTo(db.user)
+
 db.sequelize.sync();
 // db.sequelize.sync({force:true});
 // db.sequelize.drop();

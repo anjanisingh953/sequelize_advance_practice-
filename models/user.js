@@ -33,7 +33,6 @@ module.exports = (sequelize,DataTypes)=>{
         },
         city:{
             type:DataTypes.STRING,
-            allowNull:false,
              validate: {
                 isIn: {
                   args: [['Indore', 'Bhopal', 'Jabalpur', 'Delhi']],

@@ -89,6 +89,35 @@ const oneToOneUser = async(req,res)=>{
 }
 
 
+const manyToManyUser = async(req,res)=>{
+
+    // const data = await User.create({firstName:"Mohit",lastName:"Sharma"})
+    // if(data && data.id){
+    //  await Contact.create({permanent_address:"Up",current_address:"Jabalpur"})
+    // }
+
+
+    const data = await Contact.findAll({
+                attributes:['permanent_address','current_address'],
+                include:[{
+                    model:User,
+                    attributes:['firstName','lastName']
+                }]
+    });
+
+
+    //     const data = await User.findAll({
+    //             attributes:['firstName','lastName'],
+    //             include:[{
+    //                 model:Contact,
+    //                 attributes:['permanent_address','current_address']
+    //             }]
+    // });
+
+    res.status(200).json({data})
+}
+
+
 module.exports = {
     postUsers,
     getUsers,
@@ -97,5 +126,6 @@ module.exports = {
     deleteUser,
     updateUser,
     usersRawQuery,
-    oneToOneUser
+    oneToOneUser,
+    manyToManyUser
 }

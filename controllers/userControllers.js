@@ -2,6 +2,7 @@ const {QueryTypes, where} = require('sequelize');
 const db = require('../models/index');
 const User = db.user;
 const Contact = db.contact;
+const Education = db.education;
 
 const postUsers = async(req,res)=>{
     
@@ -127,7 +128,7 @@ const paranoidUser = async(req,res)=>{
    res.status(200).json({data})
 }
 
- const loadingUser = async(req,res)=>{
+ const lazyLoadingUser = async(req,res)=>{
 //    const data = await User.create({firstName:"Anamika",lastName:"Verma"})
 //     if(data && data.id){
 //      await Contact.create({permanent_address:"Bihar",current_address:"Indore",
@@ -144,6 +145,30 @@ const paranoidUser = async(req,res)=>{
  }
 
 
+ const eagerLoadingUser = async(req,res)=>{
+//    const data = await User.create({firstName:"Anamika",lastName:"Verma"})
+//     if(data && data.id){
+//      await Contact.create({permanent_address:"Bihar",current_address:"Indore",
+//          UserId:data.id })
+//      }
+ 
+    const data = await User.findAll({
+                include:[{
+                    model:Contact,
+                    required:false,
+                    right:true
+                },
+                {
+                    model:Education
+                }]
+     });
+    
+
+ 
+    res.status(200).json({data})
+ }
+
+
 module.exports = {
     postUsers,
     getUsers,
@@ -155,5 +180,6 @@ module.exports = {
     oneToOneUser,
     manyToManyUser,
     paranoidUser,
-    loadingUser
+    lazyLoadingUser,
+    eagerLoadingUser,
 }

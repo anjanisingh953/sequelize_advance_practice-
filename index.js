@@ -29,6 +29,7 @@ app.patch('/users/:id',userController.updateUser)
 app.get('/usersrawquery',userController.usersRawQuery)
 app.get('/one-to-one',userController.oneToOneUser)
 app.get('/many-to-many',userController.manyToManyUser)
+app.get('/paranoid',userController.paranoidUser)
 
 
 

@@ -41,7 +41,8 @@ module.exports = (sequelize,DataTypes)=>{
              }
         }
     },{
-        tableName:'users'
+        tableName:'users',
+        paranoid:true
     })
   return User;  
 }

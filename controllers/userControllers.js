@@ -1,4 +1,4 @@
-const {QueryTypes} = require('sequelize');
+const {QueryTypes, where} = require('sequelize');
 const db = require('../models/index');
 const User = db.user;
 const Contact = db.contact;
@@ -118,6 +118,15 @@ const manyToManyUser = async(req,res)=>{
 }
 
 
+const paranoidUser = async(req,res)=>{
+//    const data = await User.create({firstName:"Rohit",lastName:"Verma"})
+    // const data = await User.destroy({where:{
+    //     id:1
+    // }});
+    const data = await User.restore({where:{id:1}});
+   res.status(200).json({data})
+}
+
 module.exports = {
     postUsers,
     getUsers,
@@ -127,5 +136,6 @@ module.exports = {
     updateUser,
     usersRawQuery,
     oneToOneUser,
-    manyToManyUser
+    manyToManyUser,
+    paranoidUser
 }

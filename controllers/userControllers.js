@@ -175,6 +175,42 @@ const paranoidUser = async(req,res)=>{
  }
 
 
+  const creatorUser = async(req,res)=>{
+
+   const data = await Contact.create({
+        permanent_address:"Himanchal",
+        current_address:"Bhopal",
+        users:{
+            firstName:"Mohit",
+            lastName:"Sharma"
+        }
+   },{
+     include:[db.contactUser]
+   })
+    
+ 
+    // const data = await User.findAll({
+    //             include:{
+    //                 model:Contact,
+    //                 include:{
+    //                     model:Education
+    //                 }
+    //             }
+    //     // include:[{
+    //             //     model:Contact,
+    //             //     required:false,
+    //             //     right:true
+    //             // },
+    //             // {
+    //             //     model:Education
+    //             // }]
+    //  });
+    
+
+ 
+    res.status(200).json({data})
+ }
+
 module.exports = {
     postUsers,
     getUsers,
@@ -188,4 +224,5 @@ module.exports = {
     paranoidUser,
     lazyLoadingUser,
     eagerLoadingUser,
+    creatorUser
 }

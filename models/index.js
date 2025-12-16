@@ -24,7 +24,7 @@ db.education = require('./education')(sequelize,DataTypes)
 db.userContacts = require('./userContacts')(sequelize,DataTypes,db.user,db.contact)
 
 db.user.hasMany(db.contact)
-db.contact.belongsTo(db.user)
+db.contactUser =  db.contact.belongsTo(db.user,{foreignKey:'UserId',as:'users'})
 
 db.contact.hasMany(db.education)
 db.education.belongsTo(db.contact)

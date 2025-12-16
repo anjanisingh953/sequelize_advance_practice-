@@ -32,6 +32,7 @@ app.get('/many-to-many',userController.manyToManyUser)
 app.get('/paranoid',userController.paranoidUser)
 app.get('/lazy-loading',userController.lazyLoadingUser)
 app.get('/eager-loading',userController.eagerLoadingUser)
+app.get('/create-by-association',userController.creatorUser)
 
 
 

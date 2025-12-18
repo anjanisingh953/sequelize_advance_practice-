@@ -164,6 +164,28 @@ db.tag.belongsToMany(db.video, {
   constraints: false,
 });
 
+
+//Sub-Queries
+db.post = sequelize.define(
+  'post',
+  {
+    content: DataTypes.STRING,
+  },
+  { timestamps: false },
+);
+
+db.reaction = sequelize.define(
+  'reaction',
+  {
+    type: DataTypes.STRING,
+  },
+  { timestamps: false },
+);
+
+db.post.hasMany(db.reaction);
+db.reaction.belongsTo(db.post);
+
+
 db.sequelize.sync();
 // db.sequelize.sync({force:true});
 // db.sequelize.drop();
